@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>White PC with a Screen | Tech Homan</title>
+<meta name="description" content="A white gaming PC with a screen inside the case and RGB only where it counts. Every part rendered and priced on PCPartPicker (US), 15 Sep 2026.">
+<meta name="theme-color" content="#060708">
+<meta property="og:title" content="White PC with a Screen | Tech Homan">
+<meta property="og:description" content="Every part rendered and priced, 15 Sep 2026.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preload" as="image" href="frames/turn_000.webp">
+<style>
+  :root {
+    --bg: #060708; --card: #0e1013; --ink: #eceef1; --muted: #9aa1ab;
+    --line: rgba(236, 238, 241, 0.09); --chip: rgba(236, 238, 241, 0.07); --accent: #8ea6ff;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; background: var(--bg); }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+  body { margin: 0; background: transparent; color: var(--ink); font-family: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  img { display: block; max-width: 100%; height: auto; }
+  /* backdrop: faint grid like the render floor, lit by the build's violet and cyan glow */
+  body::before {
+    content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(60vw 55vh at 10% 6%, rgba(142, 116, 255, 0.18), transparent 70%),
+      radial-gradient(55vw 50vh at 94% 72%, rgba(60, 190, 255, 0.11), transparent 70%),
+      linear-gradient(rgba(236, 238, 241, 0.04) 1px, transparent 1px) 0 0 / 56px 56px,
+      linear-gradient(90deg, rgba(236, 238, 241, 0.04) 1px, transparent 1px) 0 0 / 56px 56px;
+    -webkit-mask-image: radial-gradient(130% 100% at 50% 20%, #000 35%, transparent 100%);
+    mask-image: radial-gradient(130% 100% at 50% 20%, #000 35%, transparent 100%);
+  }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
+  .links a { font-size: 14px; font-weight: 600; text-decoration: none; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); }
+  .links a:hover, .links a:focus-visible { border-color: var(--accent); color: var(--accent); outline: none; }
+  a { color: inherit; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 40px); }
+
+  .nav { position: sticky; top: 0; z-index: 3; height: 64px; display: flex; align-items: center; justify-content: space-between; padding-inline: clamp(16px, 4vw, 40px); background: linear-gradient(var(--bg), rgba(6, 7, 8, 0.6)); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .brand { font-weight: 700; font-size: 18px; letter-spacing: -0.02em; text-decoration: none; }
+  .handle { font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px; text-decoration: none; padding: 8px 14px; border-radius: 999px; background: var(--chip); }
+
+  .hero { display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(16px, 4vw, 56px); align-items: center; min-height: calc(100dvh - 64px); padding-block: 24px; }
+  h1 { font-size: clamp(2.3rem, 4.6vw, 3.8rem); line-height: 1.03; letter-spacing: -0.04em; margin: 0 0 18px; text-wrap: balance; }
+  .lede { color: var(--muted); font-size: 1.1rem; max-width: 42ch; margin: 0 0 28px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn { font: inherit; font-weight: 600; font-size: 15px; padding: 12px 20px; border-radius: 999px; text-decoration: none; white-space: nowrap; transition: transform .15s ease; }
+  .btn:active { transform: translateY(1px) scale(.98); }
+  .btn:focus-visible, .handle:focus-visible, .brand:focus-visible, .turn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+  .primary { background: var(--accent); color: #060708; }
+  .ghost { background: var(--chip); }
+
+  .turn { position: relative; margin: 0; aspect-ratio: 1; width: 100%; max-width: 760px; justify-self: center; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; border-radius: 20px; overflow: hidden; }
+  .turn:active { cursor: grabbing; }
+  .turn img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+  .hint { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); font-size: 13px; color: var(--muted); padding: 6px 12px; border-radius: 999px; background: rgba(6, 7, 8, 0.6); transition: opacity .4s ease; }
+  .hint.gone { opacity: 0; }
+
+  .apart { height: 300vh; }
+  .apart-sticky { position: sticky; top: 64px; height: calc(100dvh - 64px); display: grid; place-items: center; }
+  .apart-sticky img { width: min(100%, calc(100dvh - 120px)); aspect-ratio: 1; object-fit: cover; border-radius: 20px; }
+  .apart-cap { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); margin: 0; font-size: 14px; color: var(--muted); white-space: nowrap; }
+
+  h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -0.03em; line-height: 1.08; margin: 0 0 8px; }
+  .section-head { max-width: 60ch; margin: 96px 0 32px; }
+  .section-head p { color: var(--muted); margin: 0; }
+  .parts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .part { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; }
+  .part img { aspect-ratio: 1; object-fit: cover; width: 100%; }
+  .part-body { padding: 22px; }
+  @media (min-width: 861px) {
+    .part:last-child:nth-child(odd) { grid-column: 1 / -1; flex-direction: row; }
+    .part:last-child:nth-child(odd) img { width: 50%; }
+    .part:last-child:nth-child(odd) .part-body { align-self: center; }
+  }
+  .part h3 { font-size: 1.35rem; letter-spacing: -0.02em; margin: 0 0 4px; }
+  .product { margin: 0 0 4px; font-weight: 500; }
+  .price { font-family: 'Geist Mono', ui-monospace, monospace; font-size: 1.35rem; margin: 0 0 12px; }
+  .why { color: var(--muted); margin: 0 0 14px; }
+  .facts { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+  .facts li { font-size: 13px; padding: 6px 11px; border-radius: 999px; background: var(--chip); }
+
+  .budget { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: clamp(20px, 4vw, 36px); margin-top: 20px; }
+  .drivers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 0; }
+  .driver { background: var(--chip); border-radius: 12px; padding: 14px; }
+  .driver b { display: block; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 1.25rem; font-weight: 500; }
+  .driver span { font-size: 13px; color: var(--muted); }
+
+  .list { max-width: 720px; }
+  .group { padding-top: 14px; margin-bottom: 18px; border-top: 1px solid var(--line); }
+  .group h3 { font-size: 13px; font-weight: 600; color: var(--muted); margin: 0 0 6px; }
+  .row { display: flex; justify-content: space-between; gap: 16px; padding: 5px 0; }
+  .row span:last-child { font-family: 'Geist Mono', ui-monospace, monospace; white-space: nowrap; }
+  .total { display: flex; justify-content: space-between; align-items: baseline; padding-top: 16px; border-top: 1px solid var(--line); }
+  .total span { font-family: 'Geist Mono', ui-monospace, monospace; font-size: 2rem; letter-spacing: -0.03em; }
+  .note { color: var(--muted); font-size: 14px; margin: 12px 0 0; }
+  footer { margin: 96px 0 40px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
+  footer p { margin: 0 0 8px; max-width: 80ch; }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 8px; }
+    .turn { order: -1; }
+    .parts { grid-template-columns: 1fr; }
+    .drivers { grid-template-columns: 1fr; }
+    .apart { height: 220vh; }
+    .apart-sticky { place-items: start center; padding-top: 48px; }
+  }
+</style>
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="../">Tech Homan</a>
+  <a class="handle" href="https://www.tiktok.com/@tech.homan" target="_blank" rel="noopener">@tech.homan</a>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div>
+      <h1>White, a little RGB, and a screen inside.</h1>
+      <p class="lede">The request: $1,100, white, RGB but not everywhere, a screen. Every part below, priced on 15 Sep 2026.</p>
+      <div class="actions">
+        <a class="btn primary" href="#apart">Take it apart</a>
+        <a class="btn ghost" href="#list">Parts list</a>
+      </div>
+    </div>
+    <figure class="turn" id="turn" tabindex="0" aria-label="Rotating view of the build. Drag or use the arrow keys to spin it.">
+      <img id="turn-img" src="frames/turn_000.webp" alt="White Thermalright A70 Vision build with a screen along the top and RGB around the glass" width="1080" height="1080" draggable="false">
+      <span class="hint" id="hint">Drag to spin</span>
+    </figure>
+  </section>
+
+  <section class="apart" id="apart">
+    <div class="apart-sticky">
+      <p class="apart-cap">Scroll to take it apart</p>
+      <img id="apart-img" src="frames/explode_000.webp" alt="The build separating into its parts" width="1080" height="1080">
+    </div>
+  </section>
+
+  <div class="section-head">
+    <h2>Every part, and why</h2>
+    <p>Prices from PCPartPicker (US) on 15 Sep 2026.</p>
+  </div>
+
+  <section class="parts">
+    <article class="part">
+      <img src="frames/part_lcd.webp" alt="The 9.16 inch screen mounted along the top of the case" width="1080" height="1080" loading="lazy">
+      <div class="part-body">
+        <h3>Case</h3>
+        <p class="product">Thermalright TR-A70 Vision White</p>
+        <p class="price">$159.90</p>
+        <p class="why">This is the screen from the request: a 9.16 inch display along the top, behind glass on the front, side and top, with an ARGB strip around the glass.</p>
+        <ul class="facts"><li>9.16 in LCD, 1920 x 480</li><li>GPUs up to 420 mm</li><li>No fans in the box</li></ul>
+        <p class="links"><a href="https://www.thermalright.com/product/a70-vision-white/" target="_blank" rel="noopener">Maker page</a><a href="https://pcpartpicker.com/search/?q=Thermalright%20A70%20Vision%20White" target="_blank" rel="noopener">Check price</a></p>
+      </div>
+    </article>
+    <article class="part">
+      <img src="frames/part_gpu.webp" alt="White ASUS Dual RX 9060 XT with two fans" width="1080" height="1080" loading="lazy">
+      <div class="part-body">
+        <h3>Graphics card</h3>
+        <p class="product">ASUS Dual Radeon RX 9060 XT 16GB White</p>
+        <p class="price">$539.99</p>
+        <p class="why">The biggest line on the list. 16 GB of VRAM leaves room for newer games that need more than 8 GB, and the white shroud matches the case. The black PowerColor version is $469.99.</p>
+        <ul class="facts"><li>16 GB GDDR6</li><li>202 x 120 x 49 mm</li><li>One 8-pin</li></ul>
+        <p class="links"><a href="https://www.asus.com/us/motherboards-components/graphics-cards/dual/dual-rx9060xt-16g-white/" target="_blank" rel="noopener">Maker page</a><a href="https://pcpartpicker.com/search/?q=DUAL-RX9060XT-16G-WHITE" target="_blank" rel="noopener">Check price</a></p>
+      </div>
+    </article>
+    <article class="part">
+      <img src="frames/part_cpu.webp" alt="AMD Ryzen 5 7600X processor" width="1080" height="1080" loading="lazy">
+      <div class="part-body">
+        <h3>Processor</h3>
+        <p class="product">AMD Ryzen 5 7600X</p>
+        <p class="price">$163.00</p>
+        <p class="why">Six Zen 4 cores. The Ryzen 5 8400F is $14 cheaper, but it has half the cache and tests slower in games, so the $14 stays here.</p>
+        <ul class="facts"><li>6 cores, 12 threads</li><li>AM5 socket</li><li>No cooler in the box</li></ul>
+        <p class="links"><a href="https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7600x.html" target="_blank" rel="noopener">Maker page</a><a href="https://pcpartpicker.com/search/?q=Ryzen%205%207600X" target="_blank" rel="noopener">Check price</a></p>
+      </div>
+    </article>
+    <article class="part">
+      <img src="frames/part_cooler.webp" alt="White Thermalright Assassin X 120 R Digital cooler with a rainbow fan ring" width="1080" height="1080" loading="lazy">
+      <div class="part-body">
+        <h3>Cooler</h3>
+        <p class="product">Thermalright Assassin X 120 R Digital ARGB White</p>
+        <p class="price">$24.90</p>
+        <p class="why">A white single tower with a small display on top. Its fan ring is one of the few places this build gets RGB.</p>
+        <ul class="facts"><li>151 mm tall, case fits 168.4 mm</li><li>4 x 6 mm heatpipes</li><li>Display uses a USB 2.0 header</li></ul>
+        <p class="links"><a href="https://www.thermalright.com/product/assassin-x-120-r-digital-argb-white/" target="_blank" rel="noopener">Maker page</a><a href="https://pcpartpicker.com/search/?q=Assassin%20X%20120%20R%20Digital%20ARGB%20White" target="_blank" rel="noopener">Check price</a></p>
+      </div>
+    </article>
+    <article class="part">
+      <img src="frames/part_board.webp" alt="White ASRock B850M Pro RS WiFi motherboard" width="1080" height="1080" loading="lazy">
+      <div class="part-body">
+        <h3>Motherboard</h3>
+        <p class="product">ASRock B850M Pro RS WiFi White</p>
+        <p class="price">$139.99</p>
+        <p class="why">White board, silver heatsinks. Three ARGB headers cover the case strip, the cooler and the fan hub, and two USB 2.0 headers run the two displays.</p>
+        <ul class="facts"><li>Wi-Fi 6E and 2.5G LAN</li><li>3 ARGB headers</li><li>2 USB 2.0 headers</li></ul>
+        <p class="links"><a href="https://www.asrock.com/mb/AMD/B850M%20Pro%20RS%20WiFi%20White/index.asp" target="_blank" rel="noopener">Maker page</a><a href="https://pcpartpicker.com/search/?q=B850M%20Pro%20RS%20WiFi%20White" target="_blank" rel="noopener">Check price</a></p>
+      </div>
+    </article>
+    <article class="part">
+      <img src="frames/part_ram.webp" alt="Two black T-Force Vulcan DDR5 memory sticks" width="1080" height="1080" loading="lazy">
+      <div class="part-body">
+        <h3>Memory</h3>
+        <p class="product">TEAMGROUP T-Force Vulcan 16GB (2 x 8GB) DDR5-6000</p>
+        <p class="price">$239.99</p>
+        <p class="why">Plain black, low profile, no RGB, so the lighting stays where it was asked for.</p>
+        <ul class="facts"><li>2 x 8 GB, dual channel</li><li>CL38</li><li>1.25 V</li></ul>
+        <p class="links"><a href="https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/vulcan-ddr5-black/vulcan-ddr5-black-FLBD516G6000HC38ADC01/" target="_blank" rel="noopener">Maker page</a><a href="https://pcpartpicker.com/search/?q=FLBD516G6000HC38ADC01" target="_blank" rel="noopener">Check price</a></p>
+      </div>
+    </article>
+    <article class="part">
+      <img src="frames/part_ssd.webp" alt="Kingston NV3 M.2 SSD" width="1080" height="1080" loading="lazy">
+      <div class="part-body">
+        <h3>Storage</h3>
+        <p class="product">Kingston NV3 1TB</p>
+        <p class="price">$156.00</p>
+        <p class="why">A PCIe 4.0 NVMe drive that hides under the motherboard's M.2 heatsink. The 500 GB version is $109.00.</p>
+        <ul class="facts"><li>M.2 2280</li><li>PCIe 4.0 x4</li><li>1 TB</li></ul>
+        <p class="links"><a href="https://www.kingston.com/en/ssd/nv3-nvme-pcie-ssd" target="_blank" rel="noopener">Maker page</a><a href="https://pcpartpicker.com/search/?q=SNV3S%2F1000G" target="_blank" rel="noopener">Check price</a></p>
+      </div>
+    </article>
+    <article class="part">
+      <img src="frames/part_psu.webp" alt="White SAMA GT650 power supply" width="1080" height="1080" loading="lazy">
+      <div class="part-body">
+        <h3>Power supply</h3>
+        <p class="product">SAMA GT650 White</p>
+        <p class="price">$64.99</p>
+        <p class="why">650 W, fully modular, white. The graphics card draws about 150 W, so there is plenty of headroom. It mounts behind the motherboard tray.</p>
+        <ul class="facts"><li>80+ Gold</li><li>ATX 3.1</li><li>5 year warranty</li></ul>
+        <p class="links"><a href="https://pcpartpicker.com/product/Wx9nTW/sama-gt-650-w-80-gold-certified-fully-modular-atx-power-supply-gt650-whgffxx1-us" target="_blank" rel="noopener">Product and price</a></p>
+      </div>
+    </article>
+    <article class="part">
+      <img src="frames/part_fansBottom.webp" alt="Three white Montech fans glowing with rainbow light" width="1080" height="1080" loading="lazy">
+      <div class="part-body">
+        <h3>Fans</h3>
+        <p class="product">Montech GF120 V2 ARGB White (3-pack) + 2x Thermalright TL-C12CW White</p>
+        <p class="price">$27.95 + $16.78</p>
+        <p class="why">The case comes with no fans. The three at the bottom glow and pull air in. Two plain white fans at the back push the hot air out. RGB stays on the glass strip, these three fans and the cooler.</p>
+        <ul class="facts"><li>120 mm</li><li>Hub included with the ARGB pack</li><li>RGB on 3 of 5</li></ul>
+        <p class="links"><a href="https://www.montechpc.com/gf120-v2-argb" target="_blank" rel="noopener">Montech page</a><a href="https://www.thermalright.com/product/tl-c12cw/" target="_blank" rel="noopener">Thermalright page</a><a href="https://pcpartpicker.com/search/?q=Montech%20GF120%20V2%20White" target="_blank" rel="noopener">Check price</a></p>
+      </div>
+    </article>
+  </section>
+
+  <section class="budget">
+    <h2>Why $1,533.49, not $1,100</h2>
+    <p class="note" style="margin:0;font-size:1rem">Parts cost far more in 2026. Memory makers are moving production to AI server memory, so DDR5 and SSDs are priced well above normal.</p>
+    <div class="drivers">
+      <div class="driver"><b>$539.99</b><span>White RX 9060 XT 16GB</span></div>
+      <div class="driver"><b>$239.99</b><span>16 GB of DDR5</span></div>
+      <div class="driver"><b>$156.00</b><span>1 TB SSD</span></div>
+    </div>
+    <p class="note">Closest cuts: the black graphics card saves $70.00 and the 500 GB SSD saves $47.00. That still lands at $1,416.49.</p>
+  </section>
+
+  <div class="section-head" id="list">
+    <h2>Full parts list</h2>
+  </div>
+  <section class="list">
+    <div class="group">
+      <h3>Core</h3>
+      <div class="row"><span>AMD Ryzen 5 7600X</span><span>$163.00</span></div>
+      <div class="row"><span>Thermalright Assassin X 120 R Digital ARGB White</span><span>$24.90</span></div>
+      <div class="row"><span>ASRock B850M Pro RS WiFi White</span><span>$139.99</span></div>
+      <div class="row"><span>TEAMGROUP T-Force Vulcan 16GB DDR5-6000</span><span>$239.99</span></div>
+    </div>
+    <div class="group">
+      <h3>Graphics and storage</h3>
+      <div class="row"><span>ASUS Dual Radeon RX 9060 XT 16GB White</span><span>$539.99</span></div>
+      <div class="row"><span>Kingston NV3 1TB</span><span>$156.00</span></div>
+    </div>
+    <div class="group">
+      <h3>Case, power and fans</h3>
+      <div class="row"><span>Thermalright TR-A70 Vision White</span><span>$159.90</span></div>
+      <div class="row"><span>SAMA GT650 White</span><span>$64.99</span></div>
+      <div class="row"><span>Montech GF120 V2 ARGB White (3-pack)</span><span>$27.95</span></div>
+      <div class="row"><span>Thermalright TL-C12CW White (x2, $8.39 each)</span><span>$16.78</span></div>
+    </div>
+    <div class="total"><strong>Total</strong><span>$1,533.49</span></div>
+    <p class="note">PCPartPicker prices (US), checked 15 Sep 2026. Prices move daily, so check before you buy.</p>
+  </section>
+
+  <section class="budget" id="order">
+    <h2>Want a site like this?</h2>
+    <p class="note" style="margin:0;font-size:1rem">I build 3D sites like this one to order, for your PC build, your product or your business.</p>
+    <div class="actions" style="margin-top:20px"><a class="btn primary" href="https://www.tiktok.com/@tech.homan" target="_blank" rel="noopener">Message @tech.homan on TikTok</a></div>
+  </section>
+
+  <footer>
+    <p>Made by Tech Homan. Follow <a href="https://www.tiktok.com/@tech.homan" target="_blank" rel="noopener">@tech.homan</a> for the next build.</p>
+    <p>All products shown are made and owned by their companies. The 3D models on this page are replicas made by Tech Homan from each maker's specs and photos. Tech Homan is not affiliated with AMD, ASUS, ASRock, Thermalright, TEAMGROUP, Kingston, SAMA or Montech.</p>
+  </footer>
+</main>
+
+<script>
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const pad = n => String(n).padStart(3, '0');
+  const load = (prefix, n) => Array.from({ length: n }, (_, i) => {
+    const im = new Image();
+    im.decoding = 'async';
+    im.src = `frames/${prefix}_${pad(i)}.webp`;
+    return im;
+  });
+
+  // Turntable: auto-spins until touched, then follows drag or arrow keys.
+  const T = 72, turn = document.getElementById('turn'), turnImg = document.getElementById('turn-img'), hint = document.getElementById('hint');
+  let turnFrames = null, frame = 0, spinning = !reduce, dragX = null, dragFrom = 0, lastTick = 0, t0 = 0;
+  addEventListener('load', () => { turnFrames = load('turn', T); });
+  const show = i => {
+    const next = ((i % T) + T) % T, im = turnFrames && turnFrames[next];
+    if (im && im.complete && im.naturalWidth) { frame = next; turnImg.src = im.src; }
+  };
+  const stop = () => { spinning = false; hint.classList.add('gone'); };
+  (function tick(t) {
+    // idle: sway gently around the front view instead of showing the back of the case
+    if (spinning && t - lastTick > 60) { lastTick = t; if (!t0) t0 = t; show(Math.round(9 * Math.sin((t - t0) / 1400))); }
+    requestAnimationFrame(tick);
+  })(0);
+  turn.addEventListener('pointerdown', e => { stop(); dragX = e.clientX; dragFrom = frame; turn.setPointerCapture(e.pointerId); });
+  turn.addEventListener('pointermove', e => { if (dragX !== null) show(dragFrom - Math.round((e.clientX - dragX) / 7)); });
+  const release = () => { dragX = null; };
+  turn.addEventListener('pointerup', release);
+  turn.addEventListener('pointercancel', release);
+  turn.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); stop(); show(frame + (e.key === 'ArrowRight' ? -2 : 2)); }
+  });
+
+  // Exploded view: frames load when the section gets close, then follow scroll position.
+  const E = 48, apart = document.getElementById('apart'), apartImg = document.getElementById('apart-img');
+  let apartFrames = null, queued = false;
+  new IntersectionObserver((entries, io) => {
+    if (entries[0].isIntersecting) { apartFrames = load('explode', E); io.disconnect(); }
+  }, { rootMargin: '1200px 0px' }).observe(apart);
+  const scrub = () => {
+    queued = false;
+    const r = apart.getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - innerHeight)));
+    const im = apartFrames && apartFrames[Math.round(p * (E - 1))];
+    if (im && im.complete && im.naturalWidth && apartImg.src !== im.src) apartImg.src = im.src;
+  };
+  const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(scrub); } };
+  addEventListener('scroll', onScroll, { passive: true });
+  addEventListener('resize', onScroll);
+</script>
+</body>
+</html>

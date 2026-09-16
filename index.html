@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tech Homan Builds</title>
+<meta name="description" content="PC builds from comment requests, each one in 3D with live prices.">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;600;700&family=Geist+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root { --bg: #eceef1; --ink: #15171b; --muted: #555c67; --line: rgba(21,23,27,.10); --chip: rgba(21,23,27,.06); --accent: #2c59e6; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #0f1114; --ink: #eceef1; --muted: #a0a7b2; --line: rgba(236,238,241,.10); --chip: rgba(236,238,241,.08); --accent: #7d98ff; } }
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'Geist', ui-sans-serif, system-ui, sans-serif; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 32px clamp(16px, 5vw, 48px) 64px; }
+  header { display: flex; justify-content: space-between; align-items: center; height: 48px; margin-bottom: 72px; }
+  .brand { font-weight: 700; font-size: 18px; letter-spacing: -0.02em; }
+  .handle { font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px; color: var(--ink); text-decoration: none; padding: 8px 14px; border-radius: 999px; background: var(--chip); }
+  h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); line-height: 1.04; letter-spacing: -0.04em; margin: 0 0 14px; }
+  .lede { color: var(--muted); max-width: 46ch; margin: 0 0 48px; font-size: 1.05rem; }
+  .build { display: grid; grid-template-columns: 1fr auto; gap: 8px 24px; align-items: end; padding: 24px 0; border-top: 1px solid var(--line); color: inherit; text-decoration: none; }
+  .build h2 { margin: 0; font-size: 1.5rem; letter-spacing: -0.03em; }
+  .build p { margin: 0; color: var(--muted); grid-column: 1; }
+  .build .price { font-family: 'Geist Mono', ui-monospace, monospace; font-size: 1.3rem; grid-column: 2; grid-row: 1 / span 2; align-self: center; }
+  .build:hover h2, .build:focus-visible h2 { color: var(--accent); }
+  .build:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+  @media (max-width: 560px) { .build { grid-template-columns: 1fr; } .build .price { grid-column: 1; grid-row: auto; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="brand">Tech Homan</span>
+    <a class="handle" href="https://www.tiktok.com/@tech.homan" target="_blank" rel="noopener">@tech.homan</a>
+  </header>
+  <h1>Builds from your comments</h1>
+  <p class="lede">Comment a budget and what you want. Each build gets its own 3D page with every part and live prices.</p>
+  <a class="build" href="white-screen-pc/">
+    <h2>White PC with a screen</h2>
+    <p>Asked for $1,100, white, RGB but not everywhere, a screen inside. Priced 15 Sep 2026.</p>
+    <span class="price">$1,533.49</span>
+  </a>
+  <p class="lede" style="margin:48px 0 0">Want a 3D site like this for your build, product or business? <a href="https://www.tiktok.com/@tech.homan" target="_blank" rel="noopener" style="color:var(--accent)">Message @tech.homan on TikTok</a>.</p>
+</div>
+</body>
+</html>
