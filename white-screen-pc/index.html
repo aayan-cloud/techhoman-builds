@@ -1,153 +1,8 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>White PC with a Screen | Tech Homan</title>
-<meta name="description" content="A white gaming PC with a screen inside the case and RGB only where it counts. Every part rendered and priced on PCPartPicker (US), 15 Sep 2026.">
-<meta name="theme-color" content="#060708">
-<meta property="og:title" content="White PC with a Screen | Tech Homan">
-<meta property="og:description" content="Every part rendered and priced, 15 Sep 2026.">
-<meta property="og:type" content="website">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="frames/turn_000.webp">
-<style>
-  :root {
-    --bg: #060708; --card: #0e1013; --ink: #eceef1; --muted: #9aa1ab;
-    --line: rgba(236, 238, 241, 0.09); --chip: rgba(236, 238, 241, 0.07); --accent: #8ea6ff;
-  }
-  *, *::before, *::after { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; background: var(--bg); }
-  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
-  body { margin: 0; background: transparent; color: var(--ink); font-family: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif; line-height: 1.55; -webkit-font-smoothing: antialiased; }
-  img { display: block; max-width: 100%; height: auto; }
-  /* backdrop: faint grid like the render floor, lit by the build's violet and cyan glow */
-  body::before {
-    content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
-    background:
-      radial-gradient(60vw 55vh at 10% 6%, rgba(142, 116, 255, 0.18), transparent 70%),
-      radial-gradient(55vw 50vh at 94% 72%, rgba(60, 190, 255, 0.11), transparent 70%),
-      linear-gradient(rgba(236, 238, 241, 0.04) 1px, transparent 1px) 0 0 / 56px 56px,
-      linear-gradient(90deg, rgba(236, 238, 241, 0.04) 1px, transparent 1px) 0 0 / 56px 56px;
-    -webkit-mask-image: radial-gradient(130% 100% at 50% 20%, #000 35%, transparent 100%);
-    mask-image: radial-gradient(130% 100% at 50% 20%, #000 35%, transparent 100%);
-  }
-  .links { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; }
-  .links a { font-size: 14px; font-weight: 600; text-decoration: none; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); }
-  .links a:hover, .links a:focus-visible { border-color: var(--accent); color: var(--accent); outline: none; }
-  a { color: inherit; }
-  .wrap { max-width: 1200px; margin: 0 auto; padding-inline: clamp(16px, 4vw, 40px); }
-
-  .nav { position: sticky; top: 0; z-index: 3; height: 64px; display: flex; align-items: center; justify-content: space-between; padding-inline: clamp(16px, 4vw, 40px); background: linear-gradient(var(--bg), rgba(6, 7, 8, 0.6)); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
-  .brand { font-weight: 700; font-size: 18px; letter-spacing: -0.02em; text-decoration: none; }
-  .handle { font-family: 'Geist Mono', ui-monospace, monospace; font-size: 14px; text-decoration: none; padding: 8px 14px; border-radius: 999px; background: var(--chip); }
-
-  .hero { display: grid; grid-template-columns: 1fr 1.15fr; gap: clamp(16px, 4vw, 56px); align-items: center; min-height: calc(100dvh - 64px); padding-block: 24px; }
-  h1 { font-size: clamp(2.3rem, 4.6vw, 3.8rem); line-height: 1.03; letter-spacing: -0.04em; margin: 0 0 18px; text-wrap: balance; }
-  .lede { color: var(--muted); font-size: 1.1rem; max-width: 42ch; margin: 0 0 28px; }
-  .actions { display: flex; flex-wrap: wrap; gap: 10px; }
-  .btn { font: inherit; font-weight: 600; font-size: 15px; padding: 12px 20px; border-radius: 999px; text-decoration: none; white-space: nowrap; transition: transform .15s ease; }
-  .btn:active { transform: translateY(1px) scale(.98); }
-  .btn:focus-visible, .handle:focus-visible, .brand:focus-visible, .turn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-  .primary { background: var(--accent); color: #060708; }
-  .ghost { background: var(--chip); }
-
-  .turn { position: relative; margin: 0; aspect-ratio: 1; width: 100%; max-width: 760px; justify-self: center; cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; border-radius: 20px; overflow: hidden; }
-  .turn:active { cursor: grabbing; }
-  .turn img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-  .hint { position: absolute; left: 50%; bottom: 16px; transform: translateX(-50%); font-size: 13px; color: var(--muted); padding: 6px 12px; border-radius: 999px; background: rgba(6, 7, 8, 0.6); transition: opacity .4s ease; }
-  .hint.gone { opacity: 0; }
-
-  .apart { height: 300vh; }
-  .apart-sticky { position: sticky; top: 64px; height: calc(100dvh - 64px); display: grid; place-items: center; }
-  .apart-sticky img { width: min(100%, calc(100dvh - 120px)); aspect-ratio: 1; object-fit: cover; border-radius: 20px; }
-  .apart-cap { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); margin: 0; font-size: 14px; color: var(--muted); white-space: nowrap; }
-
-  h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); letter-spacing: -0.03em; line-height: 1.08; margin: 0 0 8px; }
-  .section-head { max-width: 60ch; margin: 96px 0 32px; }
-  .section-head p { color: var(--muted); margin: 0; }
-  .parts { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-  .part { background: var(--card); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; display: flex; flex-direction: column; }
-  .part img { aspect-ratio: 1; object-fit: cover; width: 100%; }
-  .part-body { padding: 22px; }
-  @media (min-width: 861px) {
-    .part:last-child:nth-child(odd) { grid-column: 1 / -1; flex-direction: row; }
-    .part:last-child:nth-child(odd) img { width: 50%; }
-    .part:last-child:nth-child(odd) .part-body { align-self: center; }
-  }
-  .part h3 { font-size: 1.35rem; letter-spacing: -0.02em; margin: 0 0 4px; }
-  .product { margin: 0 0 4px; font-weight: 500; }
-  .price { font-family: 'Geist Mono', ui-monospace, monospace; font-size: 1.35rem; margin: 0 0 12px; }
-  .why { color: var(--muted); margin: 0 0 14px; }
-  .facts { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
-  .facts li { font-size: 13px; padding: 6px 11px; border-radius: 999px; background: var(--chip); }
-
-  .budget { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: clamp(20px, 4vw, 36px); margin-top: 20px; }
-  .drivers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 0; }
-  .driver { background: var(--chip); border-radius: 12px; padding: 14px; }
-  .driver b { display: block; font-family: 'Geist Mono', ui-monospace, monospace; font-size: 1.25rem; font-weight: 500; }
-  .driver span { font-size: 13px; color: var(--muted); }
-
-  .list { max-width: 720px; }
-  .group { padding-top: 14px; margin-bottom: 18px; border-top: 1px solid var(--line); }
-  .group h3 { font-size: 13px; font-weight: 600; color: var(--muted); margin: 0 0 6px; }
-  .row { display: flex; justify-content: space-between; gap: 16px; padding: 5px 0; }
-  .row span:last-child { font-family: 'Geist Mono', ui-monospace, monospace; white-space: nowrap; }
-  .total { display: flex; justify-content: space-between; align-items: baseline; padding-top: 16px; border-top: 1px solid var(--line); }
-  .total span { font-family: 'Geist Mono', ui-monospace, monospace; font-size: 2rem; letter-spacing: -0.03em; }
-  .note { color: var(--muted); font-size: 14px; margin: 12px 0 0; }
-  footer { margin: 96px 0 40px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; }
-  footer p { margin: 0 0 8px; max-width: 80ch; }
-
-  @media (max-width: 860px) {
-    .hero { grid-template-columns: 1fr; min-height: auto; padding-top: 8px; }
-    .turn { order: -1; }
-    .parts { grid-template-columns: 1fr; }
-    .drivers { grid-template-columns: 1fr; }
-    .apart { height: 220vh; }
-    .apart-sticky { place-items: start center; padding-top: 48px; }
-  }
-</style>
-</head>
-<body>
-<header class="nav">
-  <a class="brand" href="../">Tech Homan</a>
-  <a class="handle" href="https://www.tiktok.com/@tech.homan" target="_blank" rel="noopener">@tech.homan</a>
-</header>
-
-<main class="wrap">
-  <section class="hero">
-    <div>
-      <h1>White, a little RGB, and a screen inside.</h1>
-      <p class="lede">The request: $1,100, white, RGB but not everywhere, a screen. Every part below, priced on 15 Sep 2026.</p>
-      <div class="actions">
-        <a class="btn primary" href="#apart">Take it apart</a>
-        <a class="btn ghost" href="#list">Parts list</a>
-      </div>
-    </div>
-    <figure class="turn" id="turn" tabindex="0" aria-label="Rotating view of the build. Drag or use the arrow keys to spin it.">
-      <img id="turn-img" src="frames/turn_000.webp" alt="White Thermalright A70 Vision build with a screen along the top and RGB around the glass" width="1080" height="1080" draggable="false">
-      <span class="hint" id="hint">Drag to spin</span>
-    </figure>
-  </section>
-
-  <section class="apart" id="apart">
-    <div class="apart-sticky">
-      <p class="apart-cap">Scroll to take it apart</p>
-      <img id="apart-img" src="frames/explode_000.webp" alt="The build separating into its parts" width="1080" height="1080">
-    </div>
-  </section>
-
-  <div class="section-head">
-    <h2>Every part, and why</h2>
-    <p>Prices from PCPartPicker (US) on 15 Sep 2026.</p>
-  </div>
-
-  <section class="parts">
-    <article class="part">
-      <img src="frames/part_lcd.webp" alt="The 9.16 inch screen mounted along the top of the case" width="1080" height="1080" loading="lazy">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#f6f5f1"><meta name="description" content="Tech Homan's white PC with a screen. Inspect the original rendered build, every component and the $1,533.49 parts list."><title>White PC with a Screen — Tech Homan</title><link rel="icon" href="data:,"><link rel="stylesheet" href="style.css"><link rel="preload" as="image" href="frames/turn_000.webp"><script src="app.js" defer></script></head><body>
+<a class="skip" href="#main">Skip to build</a><header class="site-header"><a class="brand" href="https://aayan-cloud.github.io/techhoman-builds/"><span class="brand-mark" aria-hidden="true">th.</span>Tech Homan</a><nav aria-label="Main"><a href="#workbench">Inspect build</a><a href="#list">Parts & pricing</a><a class="social" href="https://www.tiktok.com/@tech.homan" target="_blank" rel="noopener">@tech.homan ↗</a></nav></header>
+<main id="main"><section class="intro shell"><div class="eyebrow"><span class="status-dot"></span> THE BUILD JOURNAL <span> / </span> WHITE SCREEN PC</div><div class="intro-grid"><div><h1>White.<br><span>With a screen.</span></h1><p class="intro-line">A little RGB. Only where it counts.</p></div><div class="brief"><span class="eyebrow">THE ORIGINAL BRIEF</span><p>“$1,100, white, RGB but not everywhere, a screen.”</p><div class="brief-meta"><span>Actual parts total<strong>$1,533.49 <small>USD</small></strong></span><span>Price snapshot<strong>15 Sep 2026</strong></span></div><a class="text-link" href="#budget">Where the budget went <span>↗</span></a></div></div><div class="intro-bottom"><p>White, a little RGB, and a screen inside.</p><span>DESIGN / COMPONENTS / COST</span></div></section>
+<section id="workbench" class="workbench shell" aria-labelledby="viewer-heading"><div class="section-heading"><div><span class="eyebrow">01 / THE OBJECT</span><h2 id="viewer-heading">Look closer.</h2></div><p>Original renders. Every angle, under your control.</p></div><div class="bench-grid"><div class="viewer" id="viewer"><div class="viewer-toolbar"><div class="mode-switch" role="group" aria-label="Render sequence"><button class="mode" data-mode="turn" aria-pressed="true">Rotate <span>72</span></button><button class="mode" data-mode="explode" aria-pressed="false">Explode <span>48</span></button></div><button class="expand" id="expand" aria-label="Open full-screen viewer">↗ <span>Full screen</span></button></div><div class="stage" id="stage" tabindex="0" role="group" aria-label="Original render viewer. Hover and use the wheel to scrub. Arrow keys change frames; Home and End reach the limits." aria-describedby="viewer-help"><img id="render" class="render" src="frames/turn_000.webp" alt="White Thermalright A70 Vision build with a screen along the top and RGB around the glass" width="1080" height="1080" draggable="false"><span class="media-tag">ORIGINAL RENDER SEQUENCE</span><span class="frame-tag" aria-hidden="true">TURN / 001</span><p id="media-error" role="status" hidden>This frame could not load. Try another position.</p></div><div class="scrub-controls"><button type="button" class="step" data-step="-1" aria-label="Previous frame">←</button><div class="range-wrap"><label for="frame-range">View position <output class="frame-count">01 / 72</output></label><input id="frame-range" class="frame-range" type="range" min="0" max="71" value="0" aria-label="Render frame"></div><button type="button" class="step" data-step="1" aria-label="Next frame">→</button></div><p id="viewer-help" class="viewer-help"><span>Hover image + wheel to inspect</span><span>Slider or ← → keys · Home / End</span></p><p class="media-note">Pre-rendered 3D replicas by Tech Homan. Fixed camera sequences, not live WebGL. The dark background is part of the original media.</p></div><aside class="inspector" aria-labelledby="inspect-heading"><div class="inspector-heading"><span class="eyebrow">COMPONENT INSPECTOR</span><span id="part-counter">01 / 09</span></div><h3 id="inspect-heading">Inside the build.</h3><div class="part-selectors" role="group" aria-label="Choose a component"><button type="button" class="part-select" data-part="0" aria-pressed="true" aria-controls="component-0"><span>01</span>Case</button><button type="button" class="part-select" data-part="1" aria-pressed="false" aria-controls="component-1"><span>02</span>Graphics card</button><button type="button" class="part-select" data-part="2" aria-pressed="false" aria-controls="component-2"><span>03</span>Processor</button><button type="button" class="part-select" data-part="3" aria-pressed="false" aria-controls="component-3"><span>04</span>Cooler</button><button type="button" class="part-select" data-part="4" aria-pressed="false" aria-controls="component-4"><span>05</span>Motherboard</button><button type="button" class="part-select" data-part="5" aria-pressed="false" aria-controls="component-5"><span>06</span>Memory</button><button type="button" class="part-select" data-part="6" aria-pressed="false" aria-controls="component-6"><span>07</span>Storage</button><button type="button" class="part-select" data-part="7" aria-pressed="false" aria-controls="component-7"><span>08</span>Power supply</button><button type="button" class="part-select" data-part="8" aria-pressed="false" aria-controls="component-8"><span>09</span>Fans</button></div><div id="part-panels"><article class="part" id="component-0" tabindex="-1">
+      <div class="part-media"><img src="frames/part_lcd.webp" alt="The 9.16 inch screen mounted along the top of the case" width="1080" height="1080" loading="eager"></div>
       <div class="part-body">
         <h3>Case</h3>
         <p class="product">Thermalright TR-A70 Vision White</p>
@@ -156,9 +11,8 @@
         <ul class="facts"><li>9.16 in LCD, 1920 x 480</li><li>GPUs up to 420 mm</li><li>No fans in the box</li></ul>
         <p class="links"><a href="https://www.thermalright.com/product/a70-vision-white/" target="_blank" rel="noopener">Maker page</a><a href="https://pcpartpicker.com/search/?q=Thermalright%20A70%20Vision%20White" target="_blank" rel="noopener">Check price</a></p>
       </div>
-    </article>
-    <article class="part">
-      <img src="frames/part_gpu.webp" alt="White ASUS Dual RX 9060 XT with two fans" width="1080" height="1080" loading="lazy">
+    </article><article class="part" id="component-1" tabindex="-1" hidden>
+      <div class="part-media"><img src="frames/part_gpu.webp" alt="White ASUS Dual RX 9060 XT with two fans" width="1080" height="1080" loading="lazy"></div>
       <div class="part-body">
         <h3>Graphics card</h3>
         <p class="product">ASUS Dual Radeon RX 9060 XT 16GB White</p>
@@ -167,9 +21,8 @@
         <ul class="facts"><li>16 GB GDDR6</li><li>202 x 120 x 49 mm</li><li>One 8-pin</li></ul>
         <p class="links"><a href="https://www.asus.com/us/motherboards-components/graphics-cards/dual/dual-rx9060xt-16g-white/" target="_blank" rel="noopener">Maker page</a><a href="https://pcpartpicker.com/search/?q=DUAL-RX9060XT-16G-WHITE" target="_blank" rel="noopener">Check price</a></p>
       </div>
-    </article>
-    <article class="part">
-      <img src="frames/part_cpu.webp" alt="AMD Ryzen 5 7600X processor" width="1080" height="1080" loading="lazy">
+    </article><article class="part" id="component-2" tabindex="-1" hidden>
+      <div class="part-media"><img src="frames/part_cpu.webp" alt="AMD Ryzen 5 7600X processor" width="1080" height="1080" loading="lazy"></div>
       <div class="part-body">
         <h3>Processor</h3>
         <p class="product">AMD Ryzen 5 7600X</p>
@@ -178,9 +31,8 @@
         <ul class="facts"><li>6 cores, 12 threads</li><li>AM5 socket</li><li>No cooler in the box</li></ul>
         <p class="links"><a href="https://www.amd.com/en/products/processors/desktops/ryzen/7000-series/amd-ryzen-5-7600x.html" target="_blank" rel="noopener">Maker page</a><a href="https://pcpartpicker.com/search/?q=Ryzen%205%207600X" target="_blank" rel="noopener">Check price</a></p>
       </div>
-    </article>
-    <article class="part">
-      <img src="frames/part_cooler.webp" alt="White Thermalright Assassin X 120 R Digital cooler with a rainbow fan ring" width="1080" height="1080" loading="lazy">
+    </article><article class="part" id="component-3" tabindex="-1" hidden>
+      <div class="part-media"><img src="frames/part_cooler.webp" alt="White Thermalright Assassin X 120 R Digital cooler with a rainbow fan ring" width="1080" height="1080" loading="lazy"></div>
       <div class="part-body">
         <h3>Cooler</h3>
         <p class="product">Thermalright Assassin X 120 R Digital ARGB White</p>
@@ -189,9 +41,8 @@
         <ul class="facts"><li>151 mm tall, case fits 168.4 mm</li><li>4 x 6 mm heatpipes</li><li>Display uses a USB 2.0 header</li></ul>
         <p class="links"><a href="https://www.thermalright.com/product/assassin-x-120-r-digital-argb-white/" target="_blank" rel="noopener">Maker page</a><a href="https://pcpartpicker.com/search/?q=Assassin%20X%20120%20R%20Digital%20ARGB%20White" target="_blank" rel="noopener">Check price</a></p>
       </div>
-    </article>
-    <article class="part">
-      <img src="frames/part_board.webp" alt="White ASRock B850M Pro RS WiFi motherboard" width="1080" height="1080" loading="lazy">
+    </article><article class="part" id="component-4" tabindex="-1" hidden>
+      <div class="part-media"><img src="frames/part_board.webp" alt="White ASRock B850M Pro RS WiFi motherboard" width="1080" height="1080" loading="lazy"></div>
       <div class="part-body">
         <h3>Motherboard</h3>
         <p class="product">ASRock B850M Pro RS WiFi White</p>
@@ -200,9 +51,8 @@
         <ul class="facts"><li>Wi-Fi 6E and 2.5G LAN</li><li>3 ARGB headers</li><li>2 USB 2.0 headers</li></ul>
         <p class="links"><a href="https://www.asrock.com/mb/AMD/B850M%20Pro%20RS%20WiFi%20White/index.asp" target="_blank" rel="noopener">Maker page</a><a href="https://pcpartpicker.com/search/?q=B850M%20Pro%20RS%20WiFi%20White" target="_blank" rel="noopener">Check price</a></p>
       </div>
-    </article>
-    <article class="part">
-      <img src="frames/part_ram.webp" alt="Two black T-Force Vulcan DDR5 memory sticks" width="1080" height="1080" loading="lazy">
+    </article><article class="part" id="component-5" tabindex="-1" hidden>
+      <div class="part-media"><img src="frames/part_ram.webp" alt="Two black T-Force Vulcan DDR5 memory sticks" width="1080" height="1080" loading="lazy"></div>
       <div class="part-body">
         <h3>Memory</h3>
         <p class="product">TEAMGROUP T-Force Vulcan 16GB (2 x 8GB) DDR5-6000</p>
@@ -211,9 +61,8 @@
         <ul class="facts"><li>2 x 8 GB, dual channel</li><li>CL38</li><li>1.25 V</li></ul>
         <p class="links"><a href="https://www.teamgroupinc.com/en/product-detail/memory/T-FORCE/vulcan-ddr5-black/vulcan-ddr5-black-FLBD516G6000HC38ADC01/" target="_blank" rel="noopener">Maker page</a><a href="https://pcpartpicker.com/search/?q=FLBD516G6000HC38ADC01" target="_blank" rel="noopener">Check price</a></p>
       </div>
-    </article>
-    <article class="part">
-      <img src="frames/part_ssd.webp" alt="Kingston NV3 M.2 SSD" width="1080" height="1080" loading="lazy">
+    </article><article class="part" id="component-6" tabindex="-1" hidden>
+      <div class="part-media"><img src="frames/part_ssd.webp" alt="Kingston NV3 M.2 SSD" width="1080" height="1080" loading="lazy"></div>
       <div class="part-body">
         <h3>Storage</h3>
         <p class="product">Kingston NV3 1TB</p>
@@ -222,9 +71,8 @@
         <ul class="facts"><li>M.2 2280</li><li>PCIe 4.0 x4</li><li>1 TB</li></ul>
         <p class="links"><a href="https://www.kingston.com/en/ssd/nv3-nvme-pcie-ssd" target="_blank" rel="noopener">Maker page</a><a href="https://pcpartpicker.com/search/?q=SNV3S%2F1000G" target="_blank" rel="noopener">Check price</a></p>
       </div>
-    </article>
-    <article class="part">
-      <img src="frames/part_psu.webp" alt="White SAMA GT650 power supply" width="1080" height="1080" loading="lazy">
+    </article><article class="part" id="component-7" tabindex="-1" hidden>
+      <div class="part-media"><img src="frames/part_psu.webp" alt="White SAMA GT650 power supply" width="1080" height="1080" loading="lazy"></div>
       <div class="part-body">
         <h3>Power supply</h3>
         <p class="product">SAMA GT650 White</p>
@@ -233,9 +81,8 @@
         <ul class="facts"><li>80+ Gold</li><li>ATX 3.1</li><li>5 year warranty</li></ul>
         <p class="links"><a href="https://pcpartpicker.com/product/Wx9nTW/sama-gt-650-w-80-gold-certified-fully-modular-atx-power-supply-gt650-whgffxx1-us" target="_blank" rel="noopener">Product and price</a></p>
       </div>
-    </article>
-    <article class="part">
-      <img src="frames/part_fansBottom.webp" alt="Three white Montech fans glowing with rainbow light" width="1080" height="1080" loading="lazy">
+    </article><article class="part" id="component-8" tabindex="-1" hidden>
+      <div class="part-media"><img src="frames/part_fansBottom.webp" alt="Three white Montech fans glowing with rainbow light" width="1080" height="1080" loading="lazy"></div>
       <div class="part-body">
         <h3>Fans</h3>
         <p class="product">Montech GF120 V2 ARGB White (3-pack) + 2x Thermalright TL-C12CW White</p>
@@ -244,108 +91,10 @@
         <ul class="facts"><li>120 mm</li><li>Hub included with the ARGB pack</li><li>RGB on 3 of 5</li></ul>
         <p class="links"><a href="https://www.montechpc.com/gf120-v2-argb" target="_blank" rel="noopener">Montech page</a><a href="https://www.thermalright.com/product/tl-c12cw/" target="_blank" rel="noopener">Thermalright page</a><a href="https://pcpartpicker.com/search/?q=Montech%20GF120%20V2%20White" target="_blank" rel="noopener">Check price</a></p>
       </div>
-    </article>
-  </section>
-
-  <section class="budget">
-    <h2>Why $1,533.49, not $1,100</h2>
-    <p class="note" style="margin:0;font-size:1rem">Parts cost far more in 2026. Memory makers are moving production to AI server memory, so DDR5 and SSDs are priced well above normal.</p>
-    <div class="drivers">
-      <div class="driver"><b>$539.99</b><span>White RX 9060 XT 16GB</span></div>
-      <div class="driver"><b>$239.99</b><span>16 GB of DDR5</span></div>
-      <div class="driver"><b>$156.00</b><span>1 TB SSD</span></div>
-    </div>
-    <p class="note">Closest cuts: the black graphics card saves $70.00 and the 500 GB SSD saves $47.00. That still lands at $1,416.49.</p>
-  </section>
-
-  <div class="section-head" id="list">
-    <h2>Full parts list</h2>
-  </div>
-  <section class="list">
-    <div class="group">
-      <h3>Core</h3>
-      <div class="row"><span>AMD Ryzen 5 7600X</span><span>$163.00</span></div>
-      <div class="row"><span>Thermalright Assassin X 120 R Digital ARGB White</span><span>$24.90</span></div>
-      <div class="row"><span>ASRock B850M Pro RS WiFi White</span><span>$139.99</span></div>
-      <div class="row"><span>TEAMGROUP T-Force Vulcan 16GB DDR5-6000</span><span>$239.99</span></div>
-    </div>
-    <div class="group">
-      <h3>Graphics and storage</h3>
-      <div class="row"><span>ASUS Dual Radeon RX 9060 XT 16GB White</span><span>$539.99</span></div>
-      <div class="row"><span>Kingston NV3 1TB</span><span>$156.00</span></div>
-    </div>
-    <div class="group">
-      <h3>Case, power and fans</h3>
-      <div class="row"><span>Thermalright TR-A70 Vision White</span><span>$159.90</span></div>
-      <div class="row"><span>SAMA GT650 White</span><span>$64.99</span></div>
-      <div class="row"><span>Montech GF120 V2 ARGB White (3-pack)</span><span>$27.95</span></div>
-      <div class="row"><span>Thermalright TL-C12CW White (x2, $8.39 each)</span><span>$16.78</span></div>
-    </div>
-    <div class="total"><strong>Total</strong><span>$1,533.49</span></div>
-    <p class="note">PCPartPicker prices (US), checked 15 Sep 2026. Prices move daily, so check before you buy.</p>
-  </section>
-
-  <section class="budget" id="order">
-    <h2>Want a site like this?</h2>
-    <p class="note" style="margin:0;font-size:1rem">I build 3D sites like this one to order, for your PC build, your product or your business.</p>
-    <div class="actions" style="margin-top:20px"><a class="btn primary" href="https://www.tiktok.com/@tech.homan" target="_blank" rel="noopener">Message @tech.homan on TikTok</a></div>
-  </section>
-
-  <footer>
+    </article></div></aside></div></section>
+<section class="engineering shell" aria-labelledby="engineering-title"><div class="section-heading"><div><span class="eyebrow">02 / THE DECISIONS</span><h2 id="engineering-title">Nothing here by accident.</h2></div><p>The original build rationale, from the glass to the headers.</p></div><div class="decision-grid"><article><span class="eyebrow">DISPLAY & ENCLOSURE</span><h3>The screen is the case.</h3><p>The Thermalright TR-A70 Vision White puts a 9.16 inch, 1920 × 480 display along the top. Glass on the front, side and top makes the internal choices part of the exterior.</p><a href="#workbench" data-inspect="0">Inspect enclosure ↗</a></article><article><span class="eyebrow">LIGHT & AIR</span><h3>Five fans. Three with RGB.</h3><p>Three bottom fans pull air in. Two plain white rear fans push hot air out. Lighting stays on the glass strip, bottom fans and cooler — not on every component.</p><a href="#workbench" data-inspect="8">Inspect cooling ↗</a></article><article><span class="eyebrow">CONNECTIONS & CLEARANCE</span><h3>The small details matter.</h3><p>The board’s three ARGB headers cover the case, cooler and fan hub. Two USB 2.0 headers run the two displays. The 151 mm cooler sits within the case’s 168.4 mm limit.</p><a href="#workbench" data-inspect="4">Inspect motherboard ↗</a></article></div></section>
+<section id="list" class="bill shell" aria-labelledby="bill-title"><div class="section-heading"><div><span class="eyebrow">03 / THE BILL OF MATERIALS</span><h2 id="bill-title">Every part. Every dollar.</h2></div><p>PCPartPicker · US pricing<br>Checked 15 Sep 2026. Not live prices.</p></div><div class="bill-grid"><div class="table-wrap"><table><caption class="sr-only">Full parts list, 10 priced line items in US dollars</caption><thead><tr><th scope="col">No.</th><th scope="col">Component</th><th scope="col">USD</th></tr></thead><tbody><tr><td>01</td><th scope="row">AMD Ryzen 5 7600X</th><td>$163.00</td></tr><tr><td>02</td><th scope="row">Thermalright Assassin X 120 R Digital ARGB White</th><td>$24.90</td></tr><tr><td>03</td><th scope="row">ASRock B850M Pro RS WiFi White</th><td>$139.99</td></tr><tr><td>04</td><th scope="row">TEAMGROUP T-Force Vulcan 16GB DDR5-6000</th><td>$239.99</td></tr><tr><td>05</td><th scope="row">ASUS Dual Radeon RX 9060 XT 16GB White</th><td>$539.99</td></tr><tr><td>06</td><th scope="row">Kingston NV3 1TB</th><td>$156.00</td></tr><tr><td>07</td><th scope="row">Thermalright TR-A70 Vision White</th><td>$159.90</td></tr><tr><td>08</td><th scope="row">SAMA GT650 White</th><td>$64.99</td></tr><tr><td>09</td><th scope="row">Montech GF120 V2 ARGB White (3-pack)</th><td>$27.95</td></tr><tr><td>10</td><th scope="row">Thermalright TL-C12CW White (x2, $8.39 each)</th><td>$16.78</td></tr></tbody><tfoot><tr><th colspan="2" scope="row">Complete build total</th><td>$1,533.49</td></tr></tfoot></table><p class="note">Prices move daily, so check before you buy. Original maker and price links are available in the component inspector.</p></div><aside id="budget" class="budget"><span class="eyebrow">THE BUDGET REALITY</span><h3>Why $1,533.49,<br>not $1,100.</h3><p>The request and the parts list are not the same number. The original build records the white graphics card at $539.99, 16 GB of DDR5 at $239.99 and a 1 TB SSD at $156.00.</p><details><summary>Original pricing context</summary><p>Parts cost far more in 2026. Memory makers are moving production to AI server memory, so DDR5 and SSDs are priced well above normal.</p><p class="note">Original project commentary, preserved from the 15 Sep 2026 price snapshot; not an independently verified market assessment.</p></details><div class="cut"><span>Black graphics card instead</span><strong>−$70.00</strong></div><div class="cut"><span>500 GB SSD instead</span><strong>−$47.00</strong></div><div class="cut alternative"><span>Even with both cuts</span><strong>$1,416.49</strong></div><p class="note">These are the original alternatives, not changes to the build shown.</p></aside></div></section>
+<section class="commission shell"><span class="eyebrow">A TECH HOMAN PROJECT</span><div><h2>Your build.<br>Its own point of view.</h2><div><p>I build 3D sites like this one to order, for your PC build, your product or your business.</p><a class="contact" href="https://www.tiktok.com/@tech.homan" target="_blank" rel="noopener">Message @tech.homan on TikTok <span>↗</span></a></div></div></section><footer>
     <p>Made by Tech Homan. Follow <a href="https://www.tiktok.com/@tech.homan" target="_blank" rel="noopener">@tech.homan</a> for the next build.</p>
     <p>All products shown are made and owned by their companies. The 3D models on this page are replicas made by Tech Homan from each maker's specs and photos. Tech Homan is not affiliated with AMD, ASUS, ASRock, Thermalright, TEAMGROUP, Kingston, SAMA or Montech.</p>
-  </footer>
-</main>
-
-<script>
-  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const pad = n => String(n).padStart(3, '0');
-  const load = (prefix, n) => Array.from({ length: n }, (_, i) => {
-    const im = new Image();
-    im.decoding = 'async';
-    im.src = `frames/${prefix}_${pad(i)}.webp`;
-    return im;
-  });
-
-  // Turntable: auto-spins until touched, then follows drag or arrow keys.
-  const T = 72, turn = document.getElementById('turn'), turnImg = document.getElementById('turn-img'), hint = document.getElementById('hint');
-  let turnFrames = null, frame = 0, spinning = !reduce, dragX = null, dragFrom = 0, lastTick = 0, t0 = 0;
-  addEventListener('load', () => { turnFrames = load('turn', T); });
-  const show = i => {
-    const next = ((i % T) + T) % T, im = turnFrames && turnFrames[next];
-    if (im && im.complete && im.naturalWidth) { frame = next; turnImg.src = im.src; }
-  };
-  const stop = () => { spinning = false; hint.classList.add('gone'); };
-  (function tick(t) {
-    // idle: sway gently around the front view instead of showing the back of the case
-    if (spinning && t - lastTick > 60) { lastTick = t; if (!t0) t0 = t; show(Math.round(9 * Math.sin((t - t0) / 1400))); }
-    requestAnimationFrame(tick);
-  })(0);
-  turn.addEventListener('pointerdown', e => { stop(); dragX = e.clientX; dragFrom = frame; turn.setPointerCapture(e.pointerId); });
-  turn.addEventListener('pointermove', e => { if (dragX !== null) show(dragFrom - Math.round((e.clientX - dragX) / 7)); });
-  const release = () => { dragX = null; };
-  turn.addEventListener('pointerup', release);
-  turn.addEventListener('pointercancel', release);
-  turn.addEventListener('keydown', e => {
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); stop(); show(frame + (e.key === 'ArrowRight' ? -2 : 2)); }
-  });
-
-  // Exploded view: frames load when the section gets close, then follow scroll position.
-  const E = 48, apart = document.getElementById('apart'), apartImg = document.getElementById('apart-img');
-  let apartFrames = null, queued = false;
-  new IntersectionObserver((entries, io) => {
-    if (entries[0].isIntersecting) { apartFrames = load('explode', E); io.disconnect(); }
-  }, { rootMargin: '1200px 0px' }).observe(apart);
-  const scrub = () => {
-    queued = false;
-    const r = apart.getBoundingClientRect();
-    const p = Math.min(1, Math.max(0, -r.top / Math.max(1, r.height - innerHeight)));
-    const im = apartFrames && apartFrames[Math.round(p * (E - 1))];
-    if (im && im.complete && im.naturalWidth && apartImg.src !== im.src) apartImg.src = im.src;
-  };
-  const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(scrub); } };
-  addEventListener('scroll', onScroll, { passive: true });
-  addEventListener('resize', onScroll);
-</script>
-</body>
-</html>
+  </footer></main><dialog id="full-view" aria-label="Full-screen original render viewer"><div class="full-header"><span>TECH HOMAN / ORIGINAL MEDIA</span><button id="close-full" autofocus>Close <span>Esc ×</span></button></div><div id="full-mount"></div></dialog></body></html>
